@@ -1,0 +1,39 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: stream-engine
+  
+  # CHANGED: H2 Database Configuration
+  datasource:
+    url: jdbc:h2:mem:stream_db;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update # This creates the tables automatically in memory
+    show-sql: true # Lets us see the SQL queries in the console
+
+  # RabbitMQ Configuration
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  # File Upload Limits
+  servlet:
+    multipart:
+      max-file-size: 2GB
+      max-request-size: 2GB
+
+# MinIO Configuration (Still uses Docker, this usually works fine)
+minio:
+  url: http://localhost:9000
+  access-key: minio_admin
+  secret-key: minio_password
+  bucket-name: video-storage

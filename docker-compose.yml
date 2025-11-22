@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # 1. The Database (PostgreSQL)
+  postgres:
+    image: postgres:15-alpine
+    container_name: stream_db_v2
+    environment:
+      # COMPLETELY NEW CREDENTIALS
+      POSTGRES_USER: stream_dev
+      POSTGRES_PASSWORD: dev_password
+      POSTGRES_DB: stream_db_dev
+    ports:
+      - "5433:5432"
+    volumes:
+      # COMPLETELY NEW VOLUME NAME
+      - postgres_data_final:/var/lib/postgresql/data
+
+  # 2. The Object Storage (MinIO)
+  minio:
+    image: minio/minio
+    container_name: stream_minio_v2
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minio_admin
+      MINIO_ROOT_PASSWORD: minio_password
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data_final:/data
+
+  # 3. The Message Queue (RabbitMQ)
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: stream_queue_v2
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+volumes:
+  postgres_data_final:
+  minio_data_final:

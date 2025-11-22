@@ -1,0 +1,25 @@
+Java
+
+target/
+*.class
+*.jar
+
+IDEs
+
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+OS
+
+.DS_Store
+Thumbs.db
+
+Docker volumes
+
+postgres_data/
+minio_data/
+nginx/logs/

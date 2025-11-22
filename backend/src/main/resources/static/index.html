@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stream Engine - Upload Test</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { background: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        #result { margin-top: 20px; padding: 10px; border: 1px solid #ddd; display: none; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+<h2>Upload a Video</h2>
+<form id="uploadForm">
+    <div class="form-group">
+        <label>Title</label>
+        <input type="text" id="title" required placeholder="My Awesome Video">
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea id="description" rows="3" placeholder="What is this video about?"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Video File (MP4)</label>
+        <input type="file" id="file" accept="video/mp4" required>
+    </div>
+    <button type="submit">Upload Video</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('file', document.getElementById('file').files[0]);
+            formData.append('title', document.getElementById('title').value);
+            formData.append('description', document.getElementById('description').value);
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = 'Uploading...';
+            resultDiv.className = '';
+
+            try {
+                const response = await fetch('/api/videos/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.className = 'success';
+                    resultDiv.innerHTML = `<strong>Success!</strong><br>Video ID: ${data.id}<br>Status: ${data.processingStatus}`;
+                } else {
+                    resultDiv.className = 'error';
+                    resultDiv.textContent = 'Upload failed: ' + JSON.stringify(data);
+                }
+            } catch (err) {
+                resultDiv.className = 'error';
+                resultDiv.textContent = 'Error: ' + err.message;
+            }
+        });
+    </script>
+</body>
+</html>
