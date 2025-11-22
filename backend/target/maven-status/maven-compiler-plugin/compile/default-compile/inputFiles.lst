@@ -1,0 +1,9 @@
+D:\Web Projects\ViDUp\backend\src\main\java\com\stream\app\service\VideoService.java
+D:\Web Projects\ViDUp\backend\src\main\java\com\stream\app\config\MinioConfig.java
+D:\Web Projects\ViDUp\backend\src\main\java\com\stream\app\consumer\VideoConsumer.java
+D:\Web Projects\ViDUp\backend\src\main\java\com\stream\app\repository\VideoRepository.java
+D:\Web Projects\ViDUp\backend\src\main\java\com\stream\app\model\Video.java
+D:\Web Projects\ViDUp\backend\src\main\java\com\stream\app\config\RabbitMQConfig.java
+D:\Web Projects\ViDUp\backend\src\main\java\com\stream\app\StreamApp.java
+D:\Web Projects\ViDUp\backend\src\main\java\com\stream\app\controller\VideoController.java
+D:\Web Projects\ViDUp\backend\src\main\java\com\stream\app\service\TranscodingService.java

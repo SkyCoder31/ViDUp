@@ -1,0 +1,9 @@
+com\stream\app\repository\VideoRepository.class
+com\stream\app\controller\VideoController.class
+com\stream\app\config\RabbitMQConfig.class
+com\stream\app\service\TranscodingService.class
+com\stream\app\StreamApp.class
+com\stream\app\model\Video.class
+com\stream\app\service\VideoService.class
+com\stream\app\config\MinioConfig.class
+com\stream\app\consumer\VideoConsumer.class
